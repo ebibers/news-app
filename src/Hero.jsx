@@ -30,7 +30,7 @@ function Hero() {
                         <p className="font-body text-center text-white pt-10 text-4xl">API</p>
                         <p className="font-body text-justify px-16 text-white pt-5 text-2xl">
                         These features are provided by World News Api which is a public api that gives
-                        access to thousands of new sources in over 50 languages from 150 different countries.</p>
+                        access to thousands of news sources in over 50 languages from 150 different countries.</p>
                     </div>
                     <div className=" self-end pb-8">
                         <p className="font-body text-center text-white text-xl">
