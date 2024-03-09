@@ -8,6 +8,7 @@ export default {
     extend: {},
     fontFamily: {
       'body': ['Yeseva One'],
+      'news': ['Noto Sans Display'],
     },
   },
   plugins: [],
