@@ -14,7 +14,7 @@ const Content = forwardRef(({}, ref) => {
 
     const postsPerPage = 6;
 
-    const fetchData = async (keyword, organization, person, location, dateFrom, dateTo, author) => {
+    const fetchData = async (keyword, organization, person, location, dateFrom, dateTo, author, language) => {
         try{
             setStatus("loading");
 
@@ -30,6 +30,9 @@ const Content = forwardRef(({}, ref) => {
             dateFrom ? apiUrl += `&earliest-publish-date=${dateFrom}` : "";
             dateTo ? apiUrl += `&latest-publish-date=${dateTo}` : "";
             author ? apiUrl += `&authors=${author}` : "";
+            language ? apiUrl += `&language=${language}` : "";
+
+            console.log(language);
             
             const response = await fetch(apiUrl);
 
@@ -63,17 +66,23 @@ const Content = forwardRef(({}, ref) => {
         <div ref={ref} className="h-screen w-full grid grid-cols-4">
             {status == "idle" &&
                 <div className="col-span-3 flex items-center justify-center">
-                    <p className="font-body font-bold text-blue-300 text-7xl">Choose search filters.</p>
+                    <p className="font-body font-bold text-blue-300 text-7xl">
+                        Choose search filters.
+                    </p>
                 </div>
             }
             {status == "error" && 
                 <div className="col-span-3 flex items-center justify-center">
-                    <p className="font-news font-bold text-blue-300 text-5xl">{error}</p>
+                    <p className="font-news font-bold text-blue-300 text-center px-10 text-5xl">
+                        {error}
+                    </p>
                 </div>
             }
             {status == "loading" && 
                 <div className="col-span-3 flex items-center justify-center">
-                    <p className="font-body font-bold text-blue-300 text-7xl">Loading...</p>
+                    <p className="font-body font-bold text-blue-300 text-7xl">
+                        Loading...
+                    </p>
                 </div>
             }
             {status == "success" && results && 
