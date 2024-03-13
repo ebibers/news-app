@@ -2,6 +2,7 @@ import { forwardRef } from "react";
 import { useState } from "react";
 import Card from "./Card.jsx";
 import Pagination from "./Pagination.jsx";
+import Filters from "./Filters.jsx";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 
@@ -11,21 +12,38 @@ const Content = forwardRef(({}, ref) => {
     const [status, setStatus] = useState("idle");
     const [error, setError] = useState(null);
 
-
     const postsPerPage = 6;
 
-    const apiUrl = `https://api.worldnewsapi.com/search-news?api-key=${apiKey}&language=en&number=100&sort=publish-time&sort-direction=DESC`;
-
-    const fetchData = async () => {
+    const fetchData = async (keyword, organization, person, location, dateFrom, dateTo, author) => {
         try{
             setStatus("loading");
 
+            let apiUrl = `https://api.worldnewsapi.com/search-news?api-key=${apiKey}&number=100&sort=publish-date&sort-direction=DESC`;
+            
+            keyword ? apiUrl += `&text=${keyword}` : "";
+            organization || person || location ? apiUrl += "&entities=" : "";
+            organization ? apiUrl += `ORG:${organization}` : "";
+            person && !organization ? apiUrl += `PER:${person}` : "";
+            person && organization ? apiUrl += `,PER:${person}` : "";
+            location && !person && !organization ? apiUrl += `LOC:${location}` : "";
+            location && (person || organization) ? apiUrl += `,LOC:${location}` : "";
+            dateFrom ? apiUrl += `&earliest-publish-date=${dateFrom}` : "";
+            dateTo ? apiUrl += `&latest-publish-date=${dateTo}` : "";
+            author ? apiUrl += `&authors=${author}` : "";
+            
             const response = await fetch(apiUrl);
+
             const data = await response.json();
             setResults(data.news);
 
+            console.log(data);
+
             if (results) {
                 setStatus("success");
+            }
+            if (data.status == "failure") {
+                setStatus("error");
+                setError(data.message);
             }
         } catch (err) {
             setStatus("error");
@@ -35,7 +53,11 @@ const Content = forwardRef(({}, ref) => {
 
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
-    const currentPosts = results.slice(firstPostIndex, lastPostIndex);
+    let currentPosts = [];
+
+    if (results) {
+        currentPosts = results.slice(firstPostIndex, lastPostIndex);
+    }
 
     return(
         <div ref={ref} className="h-screen w-full grid grid-cols-4">
@@ -46,7 +68,7 @@ const Content = forwardRef(({}, ref) => {
             }
             {status == "error" && 
                 <div className="col-span-3 flex items-center justify-center">
-                    <p className="font-news font-bold text-blue-300 text-3xl">{error}</p>
+                    <p className="font-news font-bold text-blue-300 text-5xl">{error}</p>
                 </div>
             }
             {status == "loading" && 
@@ -54,7 +76,7 @@ const Content = forwardRef(({}, ref) => {
                     <p className="font-body font-bold text-blue-300 text-7xl">Loading...</p>
                 </div>
             }
-            {status == "success" && 
+            {status == "success" && results && 
                 <div className="col-span-3 h-full">
                     <Card news={currentPosts}/>
                     <Pagination 
@@ -65,9 +87,7 @@ const Content = forwardRef(({}, ref) => {
                     />
                 </div>
             }
-            <div className="col-span-1 bg-blue-300">
-                <button onClick={fetchData}>fetch</button>
-            </div>
+            <Filters handleClick={fetchData}/>
         </div>
     );
 })

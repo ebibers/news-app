@@ -23,13 +23,13 @@ function Hero() {
                         <p className="font-body text-center text-white pt-5 text-4xl">Features</p>
                         <p className="font-body text-justify px-16 text-white pt-5 text-2xl">
                         News articles can be searched for by using a multitude of different sorting filters
-                        such as by: country, language, keyword, person, location, organization, author, news source,
-                        publication date. </p>
+                        such as by: language, keyword, person, location, organization, author, publication date.
+                        Each news card has a link that directs the user to the full article.</p>
                     </div>
                     <div>
-                        <p className="font-body text-center text-white pt-10 text-4xl">API</p>
+                        <p className="font-body text-center text-white mt-20 text-4xl">API</p>
                         <p className="font-body text-justify px-16 text-white pt-5 text-2xl">
-                        These features are provided by World News Api which is a public api that gives
+                        The website uses a public api called World News Api which gives
                         access to thousands of news sources in over 50 languages from 150 different countries.</p>
                     </div>
                     <div className=" self-end pb-8">
