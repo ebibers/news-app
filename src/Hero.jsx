@@ -4,15 +4,15 @@ function Hero() {
     return(
         <div className="h-screen relative bg-cover bg-center bg-[url('.\assets\background.jpg')]">
             <div className="w-full h-full backdrop-blur-md grid grid-cols-3">
-                <div className="w-full h-full grid grid-rows-3 col-span-2">
+                <div className="w-full h-full grid grid-rows-3 col-span-3 2xl:col-span-2">
                     <Logo/>
-                    <div className="font-body row-span-2 pl-20 h-full w-full
-                    text-white font-bold text-8xl">
+                    <div className="font-body row-span-2 px-5 2xl:mt-0 mt-32 2xl:pl-20 h-full w-full
+                    text-white font-bold text-5xl 2xl:text-8xl">
                         <p className="pb-5"><span className="text-blue-300">Your</span> Window</p>
                         <p>To the <span className="text-blue-300">World</span></p>
                     </div>
                 </div>
-                <div className="w-full h-screen bg-blue-300 grid grid-rows-4">
+                <div className="w-full h-screen bg-blue-300 2xl:visible invisible grid grid-rows-4">
                     <div>
                         <p className="font-body text-center text-white pt-10 text-4xl">DailyNews</p>
                         <p className="font-body text-justify px-16 text-white pt-5 text-2xl">

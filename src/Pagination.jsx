@@ -6,7 +6,7 @@ function Pagination({totalPosts, postsPerPage, setCurrentPage, currentPage}) {
     }
 
     return(
-        <div className="flex items-center space-x-4 mt-8 justify-center">
+        <div className="flex flex-wrap items-center space-x-4 mt-8 mb-8 2xl:mb-0 space-y-4 2xl:space-y-0 justify-center">
             {pages.map((page, index) => {
                 return <button
                 onClick={() => setCurrentPage(page)} 

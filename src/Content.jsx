@@ -31,15 +31,11 @@ const Content = forwardRef(({}, ref) => {
             dateTo ? apiUrl += `&latest-publish-date=${dateTo}` : "";
             author ? apiUrl += `&authors=${author}` : "";
             language ? apiUrl += `&language=${language}` : "";
-
-            console.log(language);
             
             const response = await fetch(apiUrl);
 
             const data = await response.json();
             setResults(data.news);
-
-            console.log(data);
 
             if (results) {
                 setStatus("success");
@@ -65,28 +61,28 @@ const Content = forwardRef(({}, ref) => {
     return(
         <div ref={ref} className="h-screen w-full grid grid-cols-4">
             {status == "idle" &&
-                <div className="col-span-3 flex items-center justify-center">
-                    <p className="font-body font-bold text-blue-300 text-7xl">
+                <div className="2xl:col-span-3 col-span-4 h-screen flex items-center justify-center">
+                    <p className="font-body font-bold text-center text-blue-300 text-7xl">
                         Choose search filters.
                     </p>
                 </div>
             }
             {status == "error" && 
-                <div className="col-span-3 flex items-center justify-center">
+                <div className="2xl:col-span-3 col-span-4 h-screen flex items-center justify-center">
                     <p className="font-news font-bold text-blue-300 text-center px-10 text-5xl">
                         {error}
                     </p>
                 </div>
             }
             {status == "loading" && 
-                <div className="col-span-3 flex items-center justify-center">
-                    <p className="font-body font-bold text-blue-300 text-7xl">
+                <div className="2xl:col-span-3 col-span-4 h-screen flex items-center justify-center">
+                    <p className="font-body text-center font-bold text-blue-300 text-7xl">
                         Loading...
                     </p>
                 </div>
             }
             {status == "success" && results && 
-                <div className="col-span-3 h-full">
+                <div className="2xl:col-span-3 col-span-4 h-full">
                     <Card news={currentPosts}/>
                     <Pagination 
                         totalPosts={results.length} 

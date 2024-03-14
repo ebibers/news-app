@@ -73,7 +73,7 @@ function Filters( {handleClick} ) {
     ];
 
     return(
-        <div className="col-span-1 flex flex-wrap flex-col space-y-14 justify-center items-center grow-0 bg-blue-300">
+        <div className="2xl:col-span-1 col-span-4 py-10 2xl:py-0 flex flex-wrap flex-col space-y-14 justify-center items-center grow-0 bg-blue-300">
             <input 
                 type="text"
                 value={keyword}
@@ -106,12 +106,12 @@ function Filters( {handleClick} ) {
                 className=" outline-blue-300 px-8 font-news w-3/4 h-12 rounded-full
                 text-xl text-blue-300 p-2 font-light"
             />
-            <div className="flex w-full flex-col flex-wrap justify-center">
-                <div className="flex justify-center space-x-40 text-white font-news w-full">
+            <div className="flex w-full 2xl:flex-col 2xl:flex-wrap px-14 2xl:px-0 justify-center">
+                <div className="flex flex-col 2xl:flex-row space-y-14 2xl:space-y-0 justify-center 2xl:space-x-40 text-white font-news w-full">
                     <p>Date From</p>
                     <p>Date To</p>
                 </div>
-                <div className="flex flex-wrap space-x-4 justify-center">
+                <div className="flex flex-wrap space-y-8 2xl:space-y-0 2xl:space-x-4 justify-center">
                     <input 
                         type="date"
                         value={dateFrom}
